@@ -8,14 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/imagen" />
-
     <Button
         android:id="@+id/BGrises"
         android:layout_width="wrap_content"
@@ -23,5 +15,22 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:text="Grises" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/imagen1" />
+
+    <Button
+        android:id="@+id/buttonRoberts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/BGrises"
+        android:layout_alignBottom="@+id/BGrises"
+        android:layout_toRightOf="@+id/BGrises"
+        android:text="Roberts" />
 
 </RelativeLayout>
