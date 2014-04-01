@@ -89,6 +89,7 @@ public class MetodosMorfologia {
 	}
 	public void componerRGB()
 	{
+		vectEmpalmado = new int[R.length];
 		for(int i=0;i<vectEmpalmado.length;i++)
 		{
 			vectEmpalmado[i]=(255<<24)|(R[i]<<16)|(G[i]<<8)| B[i];
@@ -254,10 +255,32 @@ public class MetodosMorfologia {
 
 	public void metodoDilatacion(int [] elementoEstructurante, int heightEstructurante, int widthEstructurante)
 	{
-		for(int i=0;i<R1.length-width1;i++)
+		R = new int[height1*width1];
+		G = new int[height1*width1];
+		B = new int[height1*width1];
+		for(int i=0;i<R.length;i++)
+		{
+			R[i]=255;
+			G[i]=255;
+			B[i]=255;
+		}
+		for(int i=0;i < R1.length-width1;i++)
 		{
 			if(R1[i]==0)
 			{
+				for(int j=0; j < widthEstructurante; j++)
+				{
+					for(int k=0; k < heightEstructurante; k++)
+					{
+						if(i+j+(width1*k) <= width1*height1)
+						{
+							R[i+j+(width1*k)] = (elementoEstructurante[j+(widthEstructurante*k)] == 1 ? 0 : 255);
+							G[i+j+(width1*k)] = (elementoEstructurante[j+(widthEstructurante*k)] == 1 ? 0 : 255);
+							B[i+j+(width1*k)] = (elementoEstructurante[j+(widthEstructurante*k)] == 1 ? 0 : 255);
+						}
+					}
+				}
+				
 				/*R[i] = 0;
 				G[i]=0;
 				B[i]=0;
@@ -266,8 +289,8 @@ public class MetodosMorfologia {
 				B[i+width1]=0;*/
 			
 				//for(int j=0;j<=elementoEstructurante.length-widthEstructurante;j++)
-				
-				for(int j=0;j<=widthEstructurante;j++)
+
+				/*	for(int j=0;j<=widthEstructurante;j++)
 				{
 					R[i]=(elementoEstructurante[j]==0) ? 255 : 0;
 					G[i]=(elementoEstructurante[j]==0) ? 255 : 0;
@@ -275,7 +298,7 @@ public class MetodosMorfologia {
 					R[i+width1]=(elementoEstructurante[j+widthEstructurante]==0) ? 255 : 0;
 					G[i+width1]=(elementoEstructurante[j+widthEstructurante]==0) ? 255 : 0;
 					B[i+width1]=(elementoEstructurante[j+widthEstructurante]==0) ? 255 : 0;
-				}
+				}*/
 			}
 		}
 	}

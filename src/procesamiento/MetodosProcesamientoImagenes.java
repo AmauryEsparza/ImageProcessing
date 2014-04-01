@@ -74,143 +74,20 @@ public class MetodosProcesamientoImagenes {
 	{
 		for(int i=0;i<vectImagen.length;i++)
 		{
-			if(R[i]>100)
-			{
-				R[i]=0;
-				G[i]=0;
-				B[i]=0;
-			}
-			else
+			if(R[i]>190)
 			{
 				R[i]=255;
 				G[i]=255;
 				B[i]=255;
 			}
+			else
+			{
+				R[i]=0;
+				G[i]=0;
+				B[i]=0;
+			}
 		}
 		
-	}
-	
-	public String metodoFreeman()
-	{
-		String cadenaFreeman="";
-		int x=0,i;
-		for(i=0; i < (R.length-width)-1; i++)
-		{
-			if(R[i] != 255)
-			{
-				x=i; //Primer posicion
-				break;
-			}
-			
-		}
-		i=x;
-		do
-		{
-			switch(x)
-			{
-				case 0:
-					if(R[i-width] != 0)
-					{
-						x=UP;
-						cadenaFreeman+=x;
-						i=i-width;
-					}
-					else if(R[i+1] != 0)
-					{
-						x=RIGHT;
-						cadenaFreeman+=x;
-						i=i+1;
-					}
-					else if(R[i+width] != 0)
-					{
-						x=DOWN;
-						cadenaFreeman+=x;
-						i=i+width;
-					}
-					else if(R[i-1] != 0) 
-					{
-						x=LEFT;
-						cadenaFreeman+=x;
-						i=i-1;
-					}
-				case 1:
-					if(R[i-1] != 0)
-					{
-						x=LEFT;
-						cadenaFreeman+=x;
-						i=i-1;
-					}
-					else if(R[i-width] != 0)
-					{
-						x=UP;
-						cadenaFreeman+=x;
-						i=i-width;
-					}
-					else if(R[i+1] != 0)
-					{
-						x=RIGHT;
-						cadenaFreeman+=x;
-						i=i+1;
-					}
-					else if(R[i+width] != 0) 
-					{
-						x=DOWN;
-						cadenaFreeman+=x;
-						i=i+width;
-					}
-				case 2:
-					if(R[i+width] != 0)
-					{
-						x=DOWN;
-						cadenaFreeman+=x;
-						i=i+width;
-					}
-					else if(R[i-1] != 0)
-					{
-						x=LEFT;
-						cadenaFreeman+=x;
-						i=i-1;
-					}
-					else if(R[i-width] != 0)
-					{
-						x=UP;
-						cadenaFreeman+=x;
-						i=i-width;
-					}
-					else if(R[i+1] != 0) 
-					{
-						x=RIGHT;
-						cadenaFreeman+=x;
-						i=i+1;
-					}
-				case 3:
-					if(R[i+1] != 0)
-					{
-						x=RIGHT;
-						cadenaFreeman+=x;
-						i=i+1;
-					}
-					else if(R[i+width] != 0)
-					{
-						x=DOWN;
-						cadenaFreeman+=x;
-						i=i+width;
-					}
-					else if(R[i-1] != 0)
-					{
-						x=LEFT;
-						cadenaFreeman+=x;
-						i=i-1;
-					}
-					else if(R[i-width] != 0) 
-					{
-						x=UP;
-						cadenaFreeman+=x;
-						i=i-width;
-					}
-			}
-		}while(i!=x);
-		return cadenaFreeman;
 	}
 	
 	public void componentes4Conectados()
@@ -237,11 +114,11 @@ public class MetodosProcesamientoImagenes {
 	{
 		
 	}
-	public void getComponentesLista()
+	public void getComponentesLista(int index)
 	{
-		for(int i=0; i < listaComponentes.get(3).getVectorComponentes().length; i++)
+		for(int i=0; i < listaComponentes.get(index).getVectorComponentes().length; i++)
 		{
-			if(listaComponentes.get(3).getVectorComponentes()[i] == 1 )
+			if(listaComponentes.get(index).getVectorComponentes()[i] == 1 )
 			{
 				R[i] = 0;
 				G[i] = 0;
@@ -255,6 +132,10 @@ public class MetodosProcesamientoImagenes {
 			}
 		}
 	}
+	public String getFreeman(int indice)
+	{
+		return listaComponentes.get(indice).getCadenaFreeman();
+	}
 	public void llenarLista()
 	{
 		listaComponentes = new ArrayList<Componentes>(); 
@@ -263,10 +144,11 @@ public class MetodosProcesamientoImagenes {
 		{
 			if(contadorComponentes[i] != 0)
 			{
-				objetoLista = new Componentes();
-				objetoLista.setEtiquetaComponente(contadorComponentes[i]);
-				objetoLista.setVectorComponentes(vectComponentes); // AQUIIIIIIIIIII!!!!!!
-				listaComponentes.add(objetoLista);
+				objetoLista = new Componentes(height, width); //Crea El Objeto a Insertar a la Lista
+				objetoLista.setEtiquetaComponente(contadorComponentes[i]); //Llama a un metodo que guarda la etiqueta del componente i
+				objetoLista.setVectorComponentes(vectComponentes);  //Manda la matriz con todos los componentes 
+				objetoLista.setCadenaFreeman(); //Manda llamar el metodo de Freeman
+				listaComponentes.add(objetoLista); // Se agrega el objeto
 			}
 		}	
 	}

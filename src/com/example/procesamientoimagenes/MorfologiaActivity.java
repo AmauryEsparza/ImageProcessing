@@ -57,14 +57,14 @@ public class MorfologiaActivity extends Activity {
 		ButtonDilatacion.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View vista)
 			{
-				int elementoEstructurante[]={1,1};
+				int elementoEstructurante[]={1,1,1,1};
 				mapa1= ((BitmapDrawable)(panelImagen1.getDrawable())).getBitmap();
 				mapa2= ((BitmapDrawable)(panelImagen2.getDrawable())).getBitmap();
 				MetodosMorfologia metodosM = new MetodosMorfologia(mapa1,mapa2);
 				metodosM.descomponerRGB();
 				metodosM.escalaGrises();
 				metodosM.metodoBinarizacion();
-				metodosM.metodoDilatacion(elementoEstructurante, 1, 0);
+				metodosM.metodoDilatacion(elementoEstructurante, 2, 2);
 				metodosM.componerRGB();
 				panelImagen1.setImageBitmap(metodosM.getMapa());
 			}

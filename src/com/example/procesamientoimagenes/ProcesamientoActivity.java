@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
 
 
@@ -17,48 +18,46 @@ public class ProcesamientoActivity extends Activity{
 	Button ButtonFreeman, ButtonSegmentacion;
 	Bitmap mapaImagen;
 	EditText textFreeman;
-	Spinner spinnerComponentes;
+	NumberPicker componentePicker;
+	String[] nombresPicker;
+	MetodosProcesamientoImagenes objProcesamiento;
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.metodosprocesamiento);
 		panelImagen = (ImageView)findViewById(R.id.imageView1);
-		ButtonFreeman = (Button)findViewById(R.id.buttonFreeman);
 		ButtonSegmentacion= (Button) findViewById(R.id.buttonSegmentacion);
 		textFreeman=(EditText)findViewById(R.id.editFreeman);
-		spinnerComponentes = (Spinner)findViewById(R.id.spinnerComponentes);
+		componentePicker = (NumberPicker)findViewById(R.id.componentePicker);
 		
 		ButtonSegmentacion.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View vista)
 			{
 				mapaImagen = ((BitmapDrawable)(panelImagen.getDrawable())).getBitmap();
-				MetodosProcesamientoImagenes objProcesamiento = new MetodosProcesamientoImagenes(mapaImagen);
+				objProcesamiento= new MetodosProcesamientoImagenes(mapaImagen);
 				objProcesamiento.descomponerRGB();
 				objProcesamiento.escalaGrises();
 				objProcesamiento.metodoBinarizacion();
 				objProcesamiento.componentes4Conectados();
-				textFreeman.setText(objProcesamiento.contarComponentesConvexos()+" ");
+				//.....................ComponentePicker.....................
+				componentePicker.setMinValue(0);
+				componentePicker.setMaxValue(objProcesamiento.contarComponentesConvexos()-1);
 				objProcesamiento.llenarLista();
-				objProcesamiento.getComponentesLista();
+				objProcesamiento.getComponentesLista(0);
+				textFreeman.setText(objProcesamiento.getFreeman(0)+" ");
 				objProcesamiento.componerRGB();
 				panelImagen.setImageBitmap(objProcesamiento.getMapa());
 			}
 		});
-		ButtonFreeman.setOnClickListener(new Button.OnClickListener(){
-			public void onClick(View vista)
-			{
-				mapaImagen = ((BitmapDrawable)(panelImagen.getDrawable())).getBitmap();
-				MetodosProcesamientoImagenes objProcesamiento = new MetodosProcesamientoImagenes(mapaImagen);
-				objProcesamiento.descomponerRGB();
-				objProcesamiento.escalaGrises();
-				objProcesamiento.metodoBinarizacion();
-				textFreeman.setText(objProcesamiento.metodoFreeman());
-				//objProcesamiento.componerRGB();
-				//panelImagen.setImageBitmap(objProcesamiento.getMapa());
+		componentePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+			public void onValueChange(NumberPicker componentePicker, int valAnterior, int valNuevo) {
+				objProcesamiento.getComponentesLista(valNuevo);
+				textFreeman.setText(objProcesamiento.getFreeman(valNuevo)+"");
+				objProcesamiento.componerRGB();
+				panelImagen.setImageBitmap(objProcesamiento.getMapa());
 				
 			}
 		});
-		
-		
+			
 	}
 }

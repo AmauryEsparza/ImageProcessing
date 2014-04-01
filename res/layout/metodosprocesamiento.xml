@@ -10,7 +10,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="88dp"
-        android:src="@drawable/imagen" />
+        android:src="@drawable/gti2" />
 
     <Button
         android:id="@+id/buttonSegmentacion"
@@ -20,14 +20,6 @@
         android:layout_below="@+id/imageView1"
         android:layout_marginLeft="23dp"
         android:text="Segmentacion" />
-
-    <Button
-        android:id="@+id/buttonFreeman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
-        android:layout_toRightOf="@+id/buttonSegmentacion"
-        android:text="Freeman" />
 
     <EditText
         android:id="@+id/editFreeman"
@@ -40,11 +32,12 @@
         <requestFocus />
     </EditText>
 
-    <Spinner
-        android:id="@+id/spinnerComponentes"
+    <NumberPicker
+        android:id="@+id/componentePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/buttonSegmentacion" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:layout_toRightOf="@+id/editFreeman" />
 
 </RelativeLayout>
