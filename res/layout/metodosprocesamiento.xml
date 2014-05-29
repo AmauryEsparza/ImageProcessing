@@ -10,16 +10,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="88dp"
-        android:src="@drawable/gti2" />
-
-    <Button
-        android:id="@+id/buttonSegmentacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/imageView1"
-        android:layout_marginLeft="23dp"
-        android:text="Segmentacion" />
+        android:src="@drawable/prueba4" />
 
     <EditText
         android:id="@+id/editFreeman"
@@ -32,12 +23,35 @@
         <requestFocus />
     </EditText>
 
+    <Button
+        android:id="@+id/buttonCoincidencias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/componentePicker"
+        android:layout_alignLeft="@+id/buttonSegmentacion"
+        android:text="Coincidencias" />
+
     <NumberPicker
         android:id="@+id/componentePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="16dp"
+        android:layout_toRightOf="@+id/buttonSegmentacion" />
+
+    <Button
+        android:id="@+id/buttonSegmentacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView1"
+        android:text="Segmentacion" />
+
+    <NumberPicker
+        android:id="@+id/NumberPickerCoincidencias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/componentePicker"
         android:layout_toRightOf="@+id/editFreeman" />
 
 </RelativeLayout>

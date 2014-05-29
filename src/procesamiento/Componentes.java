@@ -7,7 +7,12 @@ public class Componentes {
 	private int etiquetaComponente, height, width;
 	private String cadenaFreeman="";
 	private int vectorComponentes[];
-	
+	private int vectorCoincidencias[];
+	private int vectorCoincidenciasFreeman[];
+	private int numeroPixeles;
+	private int vectorComponenteRecortado[];
+	private int limiteX, limiteY, limiteInferiorX=1000000, limiteInferiorY=1000000;
+	private int centroMasaX, centroMasaY;
 	final int DERECHA = 0;
 	final int DERECHA_ARRIBA = 1;
 	final int ARRIBA = 2;
@@ -16,11 +21,15 @@ public class Componentes {
 	final int IZQUIERDA_ABAJO = 5;
 	final int ABAJO = 6;
 	final int ABAJO_DERECHA = 7;
+	private double[] distanciaTanimoto;
+	int puntoMinimoX=1000000, puntoMinimoY=1000000;
 	
-	public Componentes(int height, int width)
+	public Componentes(int height, int width, int longitudPatrones,int numeroPatronesFreeman)
 	{
 		this.height = height;
 		this.width = width;
+		vectorCoincidencias = new int[longitudPatrones];
+		vectorCoincidenciasFreeman = new int[numeroPatronesFreeman];
 	}
 	public void setEtiquetaComponente(int etiqueta)
 	{
@@ -29,6 +38,14 @@ public class Componentes {
 	public int getEtiquetaComponente()
 	{
 		return etiquetaComponente;
+	}
+	public int getHeight()
+	{
+		return height;
+	}
+	public int getWidth()
+	{
+		return width;
 	}
 	/*public void recortarComponente()
 	{
@@ -485,5 +502,142 @@ public class Componentes {
 	public String getCadenaFreeman()
 	{
 		return cadenaFreeman;
+	}
+	public void setCoincidencias(int index)
+	{
+		vectorCoincidencias[index]++;
+	}
+	public int[] getCoincidencias()
+	{
+		return vectorCoincidencias;
+	}
+	public void setCoincidenciasFreeman(int index)
+	{
+		vectorCoincidenciasFreeman[index]++;
+	}
+	public int[] getCoincidenciasFreeman()
+	{
+		return vectorCoincidenciasFreeman;
+	}
+	public void contarNumeroPixeles() //Cuenta el numero de pixeles del objeto en la lista
+	{
+		numeroPixeles = 0;
+		for(int i=0; i<vectorComponenteRecortado.length; i++)
+		{
+			if(vectorComponenteRecortado[i] == 1)
+				numeroPixeles++;
+		}
+		Log.d("Numero de Pixeles", numeroPixeles+" ");
+	}
+	public int getNumeroPixeles()
+	{
+		return numeroPixeles;
+	}
+	public void calcularCentroMasa() //Calcula el centro de masa 
+	{
+		int sumaX=0, sumaY=0;
+		for(int i=0; i < limiteY; i++)
+		{
+			for(int j=0 ; j < limiteX; j++)
+			{
+				if(vectorComponenteRecortado[(i*limiteX)+j] != 0)
+				{
+					sumaX += j;
+					sumaY += i;
+				}
+			}
+		}
+		centroMasaX=sumaX/numeroPixeles;
+		centroMasaY=sumaY/numeroPixeles;
+		Log.d("Centro de Masa", sumaX/numeroPixeles+" "+sumaY/numeroPixeles);
+	}
+	public int getCentroMasaX()
+	{
+		return centroMasaX;
+	}
+	public int getCentroMasaY()
+	{
+		return centroMasaY;
+	}
+	public void setLimitesComponente()
+	{
+		int auxX=0,auxY=0;
+		limiteX=1;limiteY=1;
+		for(int i=0; i < height; i++)
+		{
+			for(int j=0; j < width; j++)
+			{
+				if(vectorComponentes[(i*width)+j] != 0)
+				{
+					if (puntoMinimoY > i)
+					{
+						puntoMinimoY = i; //Punto más chico en el eje Y
+						limiteY++;
+					}
+					if (puntoMinimoX > j)
+					{
+						puntoMinimoX= j; //Punto más chico en el eje X
+						limiteX++;
+					}
+					if (j > auxX) //Si donde hay un pixel negro la coordenada es mayor a la antes calculada
+					{
+						auxX=j;
+						limiteX++;
+					}
+					if (i > auxY)
+					{
+						auxY=i;
+						limiteY++;
+					}
+				}
+			}
+		}
+	}
+	public void recortarComponentes()
+	{
+		int inicio=0;
+		setLimitesComponente();
+		Log.d("Limites","Limite(X,Y) "+limiteX+" "+limiteY);
+		vectorComponenteRecortado = new int[limiteX*limiteY];
+		/*for(int i=0; i<height*width; i++)
+		{
+			if(vectorComponentes[i]!=0)
+			{
+				inicio=i; 
+				Log.d("Inicio de Recorrido ", "Inicio: "+ inicio);
+				break;
+			}
+		}*/
+		for(int i=0; i < limiteY; i++)
+		{
+			for(int j=0; j < limiteX; j++)
+			{
+				vectorComponenteRecortado[(i*limiteX)+j] = vectorComponentes[(((puntoMinimoY*width)+puntoMinimoX)+(i*width))+j];
+			}
+		}
+	}
+	public int[] getComponenteRecortado() 
+	{
+		return vectorComponenteRecortado;
+	}
+	public int getAnchuraComponenteRecortado()
+	{
+		return limiteX;
+	}
+	public int getAlturaComponenteRecortado()
+	{
+		return limiteY;
+	}
+	public void setTamañoDistanciaTanimoto(int longitudLista) //Se declara el vector de coincidencias
+	{
+		distanciaTanimoto = new double[longitudLista];
+	}
+	public void setDistanciaTanimoto(double valor, int componente) 
+	{
+		distanciaTanimoto[componente] = valor;
+	}
+	public double getDistanciaTanimoto(int indexComponente)
+	{
+		return distanciaTanimoto[indexComponente];
 	}
 }
