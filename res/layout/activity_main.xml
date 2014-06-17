@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical|center_horizontal|left"
-        android:text="Empalmar" />
+        android:text="Layout Empalmar" />
 
     <ImageView
         android:id="@+id/imageView"

@@ -11,36 +11,34 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
 	ImageView panelImagen;
 	MetodosProcesamiento metodoProcesar;
-	Button botonGrises, botonRoberts,botonConvolucion,botonBinarizacion, botonOriginal, botonEmpalmar;
+	Button botonGrises, botonRoberts, botonConvolucion, botonBinarizacion, botonOriginal, botonEmpalmar;
 	EditText umbral;
 	Bitmap mapa;
 	int vectMultiplicante[]={1,1,1,1,1,1,1,1,1};
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		panelImagen = (ImageView)findViewById(R.id.imageView);
 		panelImagen.setImageResource(R.drawable.imagen2);
 		 
-		
-	//	panelImagen.setImageBitmap(mapa);
-	//	
+		/** Buttons Definition */
 		botonRoberts = (Button)findViewById(R.id.buttonRoberts);
 		botonConvolucion = (Button) findViewById(R.id.buttonConvolucion);
 		botonGrises=(Button)findViewById(R.id.BGrises);
 		botonBinarizacion = (Button)findViewById(R.id.buttonBinarizacion);
 		botonOriginal = (Button) findViewById(R.id.buttonOriginal);
 		botonEmpalmar = (Button) findViewById(R.id.buttonEmpalmar);
+		
+		/** Buttons Events */
 		botonGrises.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View vista)
 			{
-				//mapa = Bitmap.createBitmap(panelImagen.getWidth(),panelImagen.getHeight(), Config.ARGB_8888);
-				//mapa=Bitmap.createBitmap(980,310,Config.ARGB_8888);
 				mapa = ((BitmapDrawable)(panelImagen.getDrawable())).getBitmap();
 				metodoProcesar = new MetodosProcesamiento(mapa);
 				metodoProcesar.descomponerRGB();
@@ -67,8 +65,6 @@ public class MainActivity extends Activity {
 				mapa=((BitmapDrawable)(panelImagen.getDrawable())).getBitmap();
 				metodoProcesar = new MetodosProcesamiento(mapa);
 				metodoProcesar.descomponerRGB();
-				//metodoProcesar.escalaGrises();
-				//metodoProcesar.componerRGB();
 				metodoProcesar.metodoConvolucion(vectMultiplicante);
 				panelImagen.setImageBitmap(metodoProcesar.getMapa());
 			}
@@ -81,7 +77,10 @@ public class MainActivity extends Activity {
 				metodoProcesar = new MetodosProcesamiento(mapa);
 				metodoProcesar.descomponerRGB();
 				metodoProcesar.escalaGrises();
-				metodoProcesar.metodoBinarizacion(Integer.parseInt(umbral.getText().toString()));
+				if(umbral.getText() != null)
+					metodoProcesar.metodoBinarizacion(Integer.parseInt(umbral.getText().toString()));
+				else
+					metodoProcesar.metodoBinarizacion(128);
 				metodoProcesar.componerRGB();
 				panelImagen.setImageBitmap(metodoProcesar.getMapa());
 			}

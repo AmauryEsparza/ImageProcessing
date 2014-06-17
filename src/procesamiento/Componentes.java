@@ -527,7 +527,7 @@ public class Componentes {
 			if(vectorComponenteRecortado[i] == 1)
 				numeroPixeles++;
 		}
-		Log.d("Numero de Pixeles", numeroPixeles+" ");
+		//Log.d("Numero de Pixeles", numeroPixeles+" ");
 	}
 	public int getNumeroPixeles()
 	{
@@ -549,7 +549,7 @@ public class Componentes {
 		}
 		centroMasaX=sumaX/numeroPixeles;
 		centroMasaY=sumaY/numeroPixeles;
-		Log.d("Centro de Masa", sumaX/numeroPixeles+" "+sumaY/numeroPixeles);
+		//Log.d("Centro de Masa", sumaX/numeroPixeles+" "+sumaY/numeroPixeles);
 	}
 	public int getCentroMasaX()
 	{
@@ -597,7 +597,7 @@ public class Componentes {
 	{
 		int inicio=0;
 		setLimitesComponente();
-		Log.d("Limites","Limite(X,Y) "+limiteX+" "+limiteY);
+		//Log.d("Limites","Limite(X,Y) "+limiteX+" "+limiteY);
 		vectorComponenteRecortado = new int[limiteX*limiteY];
 		/*for(int i=0; i<height*width; i++)
 		{
@@ -640,4 +640,5 @@ public class Componentes {
 	{
 		return distanciaTanimoto[indexComponente];
 	}
+	
 }

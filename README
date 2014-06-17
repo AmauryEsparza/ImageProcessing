@@ -1,0 +1,17 @@
+This is a project for image processing course
+
+Implemenent different methods like:
+	-Gray Scale
+	-Binarization
+	-Roberts filter
+	-Convolution
+	-Split components of a image
+	-Mathematical morphology
+		-Dilatation
+		-And operation
+		-Or operation
+	-Patter Recognition 
+		-Tanimoto distance
+		-Freeman code 4 connected
+		-Freeman code 8 connected
+

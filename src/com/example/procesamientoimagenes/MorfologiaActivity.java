@@ -14,18 +14,31 @@ import android.graphics.Bitmap;
 public class MorfologiaActivity extends Activity {
 	
 	ImageView panelImagen1, panelImagen2;
-	Button ButtonEmpalmar,ButtonAnd,ButtonDilatacion, ButtonComponentes, ButtonProcesamiento;
+	Button ButtonEmpalmar,ButtonAnd,ButtonDilatacion, ButtonProcesamiento, ButtonOriginal;
 	Bitmap mapa1,mapa2;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.morfologia);
 		panelImagen1 = (ImageView)findViewById(R.id.imageView1);
 		panelImagen2 = (ImageView) findViewById(R.id.imageView2);
+		
+		/**Buttons Declaration */
 		ButtonAnd = (Button) findViewById(R.id.buttonAnd);
 		ButtonEmpalmar = (Button) findViewById(R.id.buttonJuntar);
 		ButtonDilatacion = (Button) findViewById(R.id.buttonDilatacion);
-		ButtonComponentes = (Button) findViewById(R.id.buttonComponentes);
 		ButtonProcesamiento = (Button) findViewById(R.id.buttonProcesamiento);
+		ButtonOriginal = (Button) findViewById(R.id.button_original);
+		
+		/** Buttons Definition */
+		ButtonOriginal.setOnClickListener(new Button.OnClickListener()
+		{
+			public void onClick(View vista)
+			{
+				panelImagen1.setImageResource(R.drawable.f);
+				panelImagen2.setImageResource(R.drawable.l);
+			}
+		});
+		
 		ButtonEmpalmar.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View vista)
 			{
@@ -65,21 +78,6 @@ public class MorfologiaActivity extends Activity {
 				metodosM.escalaGrises();
 				metodosM.metodoBinarizacion();
 				metodosM.metodoDilatacion(elementoEstructurante, 2, 2);
-				metodosM.componerRGB();
-				panelImagen1.setImageBitmap(metodosM.getMapa());
-			}
-		});
-		ButtonComponentes.setOnClickListener(new Button.OnClickListener(){
-			public void onClick(View vista)
-			{
-				int elementoEstructurante[]={1,1};
-				mapa1= ((BitmapDrawable)(panelImagen1.getDrawable())).getBitmap();
-				mapa2= ((BitmapDrawable)(panelImagen2.getDrawable())).getBitmap();
-				MetodosMorfologia metodosM = new MetodosMorfologia(mapa1,mapa2);
-				metodosM.descomponerRGB();
-				metodosM.escalaGrises();
-				metodosM.metodoBinarizacion();
-				metodosM.componentes4Conectados();
 				metodosM.componerRGB();
 				panelImagen1.setImageBitmap(metodosM.getMapa());
 			}

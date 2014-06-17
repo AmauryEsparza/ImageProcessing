@@ -12,6 +12,8 @@ public class MetodosProcesamientoImagenes {
 	static final int LEFT=2;
 	static final int UP=1;
 	static final int DOWN=3;
+	String salida;
+	String cadenaHuffman="";
 	
 	//int patron1[][]={{1,1,1,1,1},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};
 	private int patrones[][] ={
@@ -117,6 +119,7 @@ public class MetodosProcesamientoImagenes {
 	int vectImagen[], vectComponentes[], contadorComponentes[];
 	int R[],G[],B[], RColoreado[], GColoreado[], BColoreado[];                        
 	int height,width;
+	int aparicionesDireccionFreeman[]; //Guarda el numero de veces que aparece una direccion en la imagen
 	ArrayList<Componentes> listaComponentes;
 	public MetodosProcesamientoImagenes(Bitmap mapa)
 	{
@@ -449,10 +452,10 @@ public class MetodosProcesamientoImagenes {
 				int escala[] = new int[2];
 				escala[0] = listaComponentes.get(l).getCentroMasaX()-listaComponentes.get(m).getCentroMasaX();
 				escala[1] = listaComponentes.get(l).getCentroMasaY()-listaComponentes.get(m).getCentroMasaY();
-				Log.d("Centro de Masa", "Aqui empieza");
-				Log.d("Escala",escala[0]+" "+escala[1]);
-				Log.d("Centro de Masa", "Centro Masa O"+ l +" "+listaComponentes.get(l).getCentroMasaX()+" "+listaComponentes.get(l).getCentroMasaY());
-				Log.d("Centro de Masa", "Centro Masa O"+ m +" "+listaComponentes.get(m).getCentroMasaX()+" "+listaComponentes.get(m).getCentroMasaY());
+				//Log.d("Centro de Masa", "Aqui empieza");
+				//Log.d("Escala",escala[0]+" "+escala[1]);
+				//Log.d("Centro de Masa", "Centro Masa O"+ l +" "+listaComponentes.get(l).getCentroMasaX()+" "+listaComponentes.get(l).getCentroMasaY());
+				//Log.d("Centro de Masa", "Centro Masa O"+ m +" "+listaComponentes.get(m).getCentroMasaX()+" "+listaComponentes.get(m).getCentroMasaY());
 				//Log.d("Centro de masa", listaComponentes.get(l).getAlturaComponenteRecortado()+" "+ listaComponentes.get(m).getAlturaComponenteRecortado());
 				//Log.d("Centro de masa", listaComponentes.get(l).getAnchuraComponenteRecortado()+" "+ listaComponentes.get(m).getAnchuraComponenteRecortado());
 				
@@ -477,9 +480,9 @@ public class MetodosProcesamientoImagenes {
 						}
 					}
 				}
-				Log.d("Operacion And", numeroCoincidenciasUnion+" "+listaComponentes.get(l).getNumeroPixeles()+" "+listaComponentes.get(m).getNumeroPixeles());
+				//Log.d("Operacion And", numeroCoincidenciasUnion+" "+listaComponentes.get(l).getNumeroPixeles()+" "+listaComponentes.get(m).getNumeroPixeles());
 				listaComponentes.get(l).setDistanciaTanimoto((double)(((listaComponentes.get(l).getNumeroPixeles()+listaComponentes.get(m).getNumeroPixeles())-(2*numeroCoincidenciasUnion)))/(double)(((listaComponentes.get(l).getNumeroPixeles()+listaComponentes.get(m).getNumeroPixeles())-numeroCoincidenciasUnion)), m);
-				Log.d("Distancia Tanimoto", String.format("Distancia %.6f",listaComponentes.get(l).getDistanciaTanimoto(m)));
+				//Log.d("Distancia Tanimoto", String.format("Distancia %.6f",listaComponentes.get(l).getDistanciaTanimoto(m)));
 			}
 		}
 	}

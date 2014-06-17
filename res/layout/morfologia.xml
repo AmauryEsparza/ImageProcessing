@@ -14,54 +14,57 @@
         android:src="@drawable/f" />
 
     <Button
-        android:id="@+id/buttonJuntar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="15dp"
-        android:text="Juntar" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView1"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/l" />
-
-    <Button
-        android:id="@+id/buttonAnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView1"
-        android:layout_toRightOf="@+id/buttonJuntar"
-        android:text="And" />
-
-    <Button
-        android:id="@+id/buttonDilatacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonAnd"
-        android:layout_alignBottom="@+id/buttonAnd"
-        android:layout_toRightOf="@+id/buttonAnd"
-        android:text="Dilatacion" />
-
-    <Button
-        android:id="@+id/buttonComponentes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonDilatacion"
-        android:layout_alignBottom="@+id/buttonDilatacion"
-        android:layout_alignParentRight="true"
-        android:text="4 Cone" />
-
-    <Button
         android:id="@+id/buttonProcesamiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/imageView1"
         android:layout_marginTop="32dp"
-        android:text="Procesamiento" />
+        android:text="Layout Procesamiento" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonProcesamiento"
+        android:layout_marginLeft="38dp"
+        android:layout_toRightOf="@+id/imageView1"
+        android:src="@drawable/l" />
+
+    <Button
+        android:id="@+id/buttonDilatacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_marginTop="20dp"
+        android:text="Dilatacion" />
+
+    <Button
+        android:id="@+id/buttonAnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_alignLeft="@+id/buttonDilatacion"
+        android:layout_alignParentRight="true"
+        android:text="And" />
+
+    <Button
+        android:id="@+id/button_original"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonAnd"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/buttonAnd"
+        android:text="Original" />
+
+    <Button
+        android:id="@+id/buttonJuntar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonDilatacion"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="48dp"
+        android:text="Juntar" />
 
 </RelativeLayout>
